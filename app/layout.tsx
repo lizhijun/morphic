@@ -8,6 +8,7 @@ import Footer from '@/components/footer'
 import { Sidebar } from '@/components/sidebar'
 import { Toaster } from '@/components/ui/sonner'
 import { AppStateProvider } from '@/lib/utils/app-state'
+import { Analytics } from "@vercel/analytics/react"
 
 const fontSans = FontSans({
   subsets: ['latin'],
