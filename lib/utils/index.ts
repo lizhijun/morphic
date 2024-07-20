@@ -53,18 +53,16 @@ export function getModel(useSubModel = false) {
 
   // Fallback to OpenAI instead
 
-  const openai = createOpenAI({
-    baseURL: openaiApiBase, // optional base URL for proxies etc.
-    apiKey: openaiApiKey, // optional API key, default to env property OPENAI_API_KEY
-    organization: '' // optional organization
-  })
+  //const openai = createOpenAI({
+    //baseURL: openaiApiBase, // optional base URL for proxies etc.
+    //apiKey: openaiApiKey, // optional API key, default to env property OPENAI_API_KEY
+    //organization: '' // optional organization
+  //})
 
   const azure = createAzure({
-    baseURL: openaiApiBase, // optional base URL for proxies etc.
-  //resourceName: 'jiehuoai', // Azure resource name
-modelId: 'mygpt35',
-  apiKey: '4466853627cd489e9b08b201cc705693',
-});
+    resourceName: 'jiehuoai', // Azure resource name
+    apiKey: openaiApiKey,
+  });
 
   
   return azure.chat("mygpt35")
