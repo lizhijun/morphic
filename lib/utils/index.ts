@@ -5,6 +5,8 @@ import { createOpenAI } from '@ai-sdk/openai'
 import { google } from '@ai-sdk/google'
 import { anthropic } from '@ai-sdk/anthropic'
 import { CoreMessage } from 'ai'
+import { createAzure } from '@ai-sdk/azure';
+
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -57,7 +59,17 @@ export function getModel(useSubModel = false) {
     organization: '' // optional organization
   })
 
-  return openai.chat(openaiApiModel)
+  const azure = createAzure({
+    baseURL: openaiApiBase, // optional base URL for proxies etc.
+  //resourceName: 'jiehuoai', // Azure resource name
+modelId: 'mygpt35',
+  apiKey: '4466853627cd489e9b08b201cc705693',
+});
+
+  
+  return azure.chat("mygpt35")
+
+  //return openai.chat(openaiApiModel)
 }
 
 /**
