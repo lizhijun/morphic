@@ -65,7 +65,7 @@ export function getModel(useSubModel = false) {
   });
 
   
-  return azure.chat("mygpt35")
+  return azure.chat(openaiApiModel)
 
   //return openai.chat(openaiApiModel)
 }
