@@ -14,12 +14,12 @@ const fontSans = FontSans({
   variable: '--font-sans'
 })
 
-const title = 'Morphic'
+const title = '解惑AI - jiehuo.ai'
 const description =
-  'A fully open-source AI-powered answer engine with a generative UI.'
+  '基于AI的中文智能搜索引擎.'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://morphic.sh'),
+  metadataBase: new URL('https://jiehuoaii'),
   title,
   description,
   openGraph: {

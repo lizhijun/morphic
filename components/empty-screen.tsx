@@ -3,20 +3,20 @@ import { ArrowRight } from 'lucide-react'
 
 const exampleMessages = [
   {
-    heading: 'What is GPT-4o mini?',
-    message: 'What is GPT-4o mini?'
+    heading: '什么是AGI?',
+    message: '什么是AGI?'
   },
   {
-    heading: 'Why is Nvidia growing rapidly?',
-    message: 'Why is Nvidia growing rapidly?'
+    heading: '为什么科技从业者喜欢费曼?',
+    message: '为什么科技从业者喜欢费曼?'
   },
   {
-    heading: 'How does the Vercel AI SDK work?',
-    message: 'How does the Vercel AI SDK work?'
+    heading: '基于AI的搜索引擎工作原理?',
+    message: '基于AI的搜索引擎工作原理?'
   },
   {
-    heading: 'Tesla vs Rivian',
-    message: 'Tesla vs Rivian'
+    heading: '比较Google和Perplexity',
+    message: '比较Google和Perplexity'
   }
 ]
 export function EmptyScreen({
