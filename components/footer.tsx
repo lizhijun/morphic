@@ -31,10 +31,19 @@ const Footer: React.FC = () => {
           size={'icon'}
           className="1text-muted-foreground/50"
         >
-          <Link href="https://www.jiehuo.ai/baike" target="_blank">
+          <Link href="https://app.jiehuo.ai/" target="_blank">
             <SiSafari size={18} />
           </Link>
         </Button>
+        <Button
+          variant={'ghost'}
+          size={'icon'}
+          className="1text-muted-foreground/50"
+        >
+          <Link href="https://image.jiehuo.ai/" target="_blank">
+            <SiSafari size={18} />
+          </Link>
+        </Button>	
       </div>
     </footer> 
   )
