@@ -43,7 +43,16 @@ const Footer: React.FC = () => {
           <Link href="https://image.jiehuo.ai/" target="_blank">
             <SiSafari size={18} />
           </Link>
-        </Button>	
+        </Button>
+        <Button
+          variant={'ghost'}
+          size={'icon'}
+          className="1text-muted-foreground/50"
+        >
+          <Link href="https://sref.jiehuo.ai/" target="_blank">
+            <SiSafari size={18} />
+          </Link>
+        </Button>		
       </div>
     </footer> 
   )
