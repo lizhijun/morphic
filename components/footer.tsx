@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { SiImagedotsc, SiApachespark, SiTwitter, SiSafari } from 'react-icons/si'
+import { SiImagedotsc, SiApachespark, SiAlby, SiSafari, SiAmazoncloudwatch, SiCarrd } from 'react-icons/si'
 import { Button } from './ui/button'
 // https://react-icons.github.io/react-icons/icons/si/
 
@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
           className="1text-muted-foreground/50"
         >
           <Link href="https://app.jiehuo.ai/" target="_blank">
-            <SiSafari size={18} />
+            <SiAlby size={18} />
           </Link>
         </Button>
         <Button
@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
           className="1text-muted-foreground/50"
         >
           <Link href="https://image.jiehuo.ai/" target="_blank">
-            <SiSafari size={18} />
+            <SiAmazoncloudwatch size={18} />
           </Link>
         </Button>
         <Button
@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
           className="1text-muted-foreground/50"
         >
           <Link href="https://sref.jiehuo.ai/" target="_blank">
-            <SiSafari size={18} />
+            <SiCarrd size={18} />
           </Link>
         </Button>		
       </div>

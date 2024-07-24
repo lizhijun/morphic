@@ -17,7 +17,7 @@ const fontSans = FontSans({
 
 const title = '解惑AI - jiehuo.ai'
 const description =
-  '基于AI的中文智能搜索引擎.'
+  '基于AI的搜索引擎.'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://jiehuoaii'),
