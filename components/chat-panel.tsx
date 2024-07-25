@@ -7,11 +7,14 @@ import { useUIState, useActions, useAIState } from 'ai/rsc'
 import { cn } from '@/lib/utils'
 import { UserMessage } from './user-message'
 import { Button } from './ui/button'
-import { ArrowRight, Plus } from 'lucide-react'
+import { ArrowRight, Link, Plus } from 'lucide-react'
 import { EmptyScreen } from './empty-screen'
 import Textarea from 'react-textarea-autosize'
 import { generateId } from 'ai'
 import { useAppState } from '@/lib/utils/app-state'
+
+
+import './Footer.css'
 
 interface ChatPanelProps {
   messages: UIState
@@ -110,6 +113,16 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
   if (query && query.trim().length > 0) {
     return null
   }
+  
+  const tags = Array.from({ length: 100 }, (_, i) => `标签${i + 1}`);
+
+  const links = [
+    { href: '/search/nQPJhmy', text: '为什么有夏季和冬季奥运会？' },
+    { href: '/search/ORZFkjh', text: '一张纸最多可以折几次？' },
+    { href: '/search/LneFo8w', text: '为什么人会做梦？' },
+    { href: '/search/EhKuU8V', text: 'PMF是什么' },
+    { href: '/search/OsHK9Ps', text: '为什么蜂巢都是正六边形的？' },
+  ];
 
   return (
     <div
@@ -117,8 +130,11 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
         'fixed bottom-8 left-0 right-0 top-10 mx-auto h-screen flex flex-col items-center justify-center'
       }
     >
+      <p className='text-3xl'>知识的起点</p>
+      <br></br>
       <form onSubmit={handleSubmit} className="max-w-2xl w-full px-6">
         <div className="relative flex items-center w-full">
+          
           <Textarea
             ref={inputRef}
             name="input"
@@ -187,6 +203,29 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
           className={cn(showEmptyScreen ? 'visible' : 'invisible')}
         />
       </form>
+
+    
+      
+        <div className="w-full p-4 overflow-hidden">
+          <div className="space-y-2">
+            {Array.from({ length: 2 }).map((_, rowIndex) => (
+              <div key={rowIndex} className="scrolling-container overflow-hidden whitespace-nowrap">
+                <div className="scrolling-row inline-block">
+                  {links.slice(rowIndex * 2, (rowIndex + 1) * 2).map((item, tagIndex) => (
+                    <a
+                      key={tagIndex}
+                      href={item.href}
+                      className="m-1 text-white text-xl font-medium px-2.5 py-0.5 rounded hover:bg-black inline-block"
+                    >
+                      {item.text}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+    
     </div>
   )
 }
