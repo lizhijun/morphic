@@ -17,25 +17,8 @@ const Footer: React.FC = () => {
             <SiImagedotsc size={18} />
           </Link>
         </Button>
-        <Button
-          variant={'ghost'}
-          size={'icon'}
-          className="1text-muted-foreground/50"
-        >
-          <Link href="https://blog.jiehuo.ai/" target="_blank">
-            <SiApachespark size={18} />
-          </Link>
-        </Button>
-        <Button
-          variant={'ghost'}
-          size={'icon'}
-          className="1text-muted-foreground/50"
-        >
-          <Link href="https://app.jiehuo.ai/" target="_blank">
-            <SiAlby size={18} />
-          </Link>
-        </Button>
-        <Button
+        
+	<Button
           variant={'ghost'}
           size={'icon'}
           className="1text-muted-foreground/50"
@@ -44,7 +27,8 @@ const Footer: React.FC = () => {
             <SiAmazoncloudwatch size={18} />
           </Link>
         </Button>
-        <Button
+        
+	<Button
           variant={'ghost'}
           size={'icon'}
           className="1text-muted-foreground/50"
