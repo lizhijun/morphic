@@ -15,7 +15,7 @@ const fontSans = FontSans({
   variable: '--font-sans'
 })
 
-const title = '解惑AI - jiehuo.ai'
+const title = '解惑AI'
 const description = '基于AI的搜索引擎.'
 
 export const metadata: Metadata = {

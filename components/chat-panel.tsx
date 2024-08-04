@@ -130,7 +130,7 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
         'fixed bottom-8 left-0 right-0 top-10 mx-auto h-screen flex flex-col items-center justify-center'
       }
     >
-      <p className='text-3xl'>解惑AI - 知识的起点</p>
+      <p className='text-3xl'>探索好奇心</p>
       <br></br>
       <form onSubmit={handleSubmit} className="max-w-2xl w-full px-6">
         <div className="relative flex items-center w-full">
