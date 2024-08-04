@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
           size={'icon'}
           className="itext-muted-foreground/50"
         >
-          <Link href="https://toolify.jiehuo.ai/" target="_blank">
+          <Link href="https://tool.jiehuo.ai/" target="_blank">
             <SiImagedotsc size={18} />
           </Link>
         </Button>
