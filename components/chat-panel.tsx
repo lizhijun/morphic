@@ -27,7 +27,7 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
   const { isGenerating, setIsGenerating } = useAppState()
   const { submit } = useActions()
   const router = useRouter()
-  const inputRef = useRef<HTMLTextAreaElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
   const isFirstRender = useRef(true) // For development environment
 
   const handleSearch = async () => {
