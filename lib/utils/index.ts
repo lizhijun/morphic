@@ -59,10 +59,7 @@ export function getModel(useSubModel = false) {
     //organization: '' // optional organization
   //})
 
-  const azure = createAzure({
-    resourceName: 'jiehuoai', // Azure resource name
-    apiKey: openaiApiKey,
-  });
+  const azure = createAzure({});
 
   
   return azure.chat(openaiApiModel)
