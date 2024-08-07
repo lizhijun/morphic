@@ -9,10 +9,8 @@ import { UserMessage } from './user-message'
 import { Button } from './ui/button'
 import { ArrowRight, Link, Plus } from 'lucide-react'
 import { EmptyScreen } from './empty-screen'
-import Textarea from 'react-textarea-autosize'
 import { generateId } from 'ai'
 import { useAppState } from '@/lib/utils/app-state'
-
 
 import './Footer.css'
 
@@ -32,8 +30,8 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const isFirstRender = useRef(true) // For development environment
 
-  async function handleQuerySubmit(query: string, formData?: FormData) {
-    setInput(query)
+  const handleSearch = async () => {
+    if (!input.trim()) return // Prevent empty searches
     setIsGenerating(true)
 
     // Add user message to UI state
@@ -41,29 +39,28 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
       ...currentMessages,
       {
         id: generateId(),
-        component: <UserMessage message={query} />
+        component: <UserMessage message={input} />
       }
     ])
 
     // Submit and get response message
-    const data = formData || new FormData()
-    if (!formData) {
-      data.append('input', query)
-    }
+    const data = new FormData()
+    data.append('input', input)
     const responseMessage = await submit(data)
     setMessages(currentMessages => [...currentMessages, responseMessage])
+
+    setInput('') // Clear input after search
   }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const formData = new FormData(e.currentTarget)
-    await handleQuerySubmit(input, formData)
+    handleSearch()
   }
 
   // if query is not empty, submit the query
   useEffect(() => {
     if (isFirstRender.current && query && query.trim().length > 0) {
-      handleQuerySubmit(query)
+      handleSearch()
       isFirstRender.current = false
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -113,119 +110,109 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
   if (query && query.trim().length > 0) {
     return null
   }
-  
-  const tags = Array.from({ length: 100 }, (_, i) => `标签${i + 1}`);
+
+  const tags = Array.from({ length: 100 }, (_, i) => `标签${i + 1}`)
 
   const links = [
     { href: '/search/nQPJhmy', text: '为什么有夏季和冬季奥运会？' },
     { href: '/search/ORZFkjh', text: '一张纸最多可以折几次？' },
     { href: '/search/LneFo8w', text: '为什么人会做梦？' },
     { href: '/search/EhKuU8V', text: 'PMF是什么' },
-    { href: '/search/OsHK9Ps', text: '为什么蜂巢都是正六边形的？' },
-  ];
+    { href: '/search/OsHK9Ps', text: '为什么蜂巢都是正六边形的？' }
+  ]
 
   return (
-    <div
-      className={
-        'fixed bottom-8 left-0 right-0 top-10 mx-auto h-screen flex flex-col items-center justify-center'
-      }
-    >
-      <p className='text-3xl'>探索好奇心</p>
-      <br></br>
-      <form onSubmit={handleSubmit} className="max-w-2xl w-full px-6">
-        <div className="relative flex items-center w-full">
-          
-          <Textarea
+    <div className="fixed inset-0 flex flex-col items-center justify-center bg-white">
+      {/* 
+      <div className="mb-8">
+        <img src="/yandex-logo.svg" alt="Yandex" className="h-8" />
+      </div>*/}
+
+      <div className="flex justify-center space-x-8 mb-8">
+        {[
+          {
+            icon: '🖼️',
+            label: '图片',
+            href: 'https://image.jiehuo.ai/'
+          },
+          {
+            icon: '🔧',
+            label: '导航',
+            href: 'https://tool.jiehuo.ai/'
+          },
+          {
+            /*
+          {
+            icon: '🗺️',
+            label: '地图',
+            href: 'https://map.jiehuo.ai/',
+          },
+          {
+            icon: '🔄',
+            label: '翻译',
+            href: 'https://translate.jiehuo.ai/',
+          },
+          {
+            icon: '🌀',
+            label: '天气',
+            href: 'https://weather.jiehuo.ai/',
+          },
+          {
+            icon: '✉️',
+            label: '邮件',
+            href: 'https://mail.jiehuo.ai/',
+          }*/
+          }
+        ].map((item, index) => (
+          <a key={index} href={item.href} target="_blank">
+            <div key={index} className="flex flex-col items-center">
+              <div className="text-3xl mb-2">{item.icon}</div>
+              <div className="text-sm">{item.label}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <form onSubmit={handleSubmit} className="w-full max-w-2xl px-6">
+        <div className="relative">
+          <input
             ref={inputRef}
+            type="text"
             name="input"
-            rows={1}
-            maxRows={5}
-            tabIndex={0}
-            placeholder="尽管问吧..."
-            spellCheck={false}
+            placeholder="解惑一下"
             value={input}
-            className="resize-none w-full min-h-12 rounded-fill bg-muted border border-input pl-4 pr-10 pt-3 pb-1 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'"
-            onChange={e => {
-              setInput(e.target.value)
-              setShowEmptyScreen(e.target.value.length === 0)
-            }}
-            onKeyDown={e => {
-              // Enter should submit the form
-              if (
-                e.key === 'Enter' &&
-                !e.shiftKey &&
-                !e.nativeEvent.isComposing
-              ) {
-                // Prevent the default action to avoid adding a new line
-                if (input.trim().length === 0) {
-                  e.preventDefault()
-                  return
-                }
-                e.preventDefault()
-                const textarea = e.target as HTMLTextAreaElement
-                textarea.form?.requestSubmit()
-              }
-            }}
-            onHeightChange={height => {
-              // Ensure inputRef.current is defined
-              if (!inputRef.current) return
-
-              // The initial height and left padding is 70px and 2rem
-              const initialHeight = 70
-              // The initial border radius is 32px
-              const initialBorder = 32
-              // The height is incremented by multiples of 20px
-              const multiple = (height - initialHeight) / 20
-
-              // Decrease the border radius by 4px for each 20px height increase
-              const newBorder = initialBorder - 4 * multiple
-              // The lowest border radius will be 8px
-              inputRef.current.style.borderRadius =
-                Math.max(8, newBorder) + 'px'
-            }}
-            onFocus={() => setShowEmptyScreen(true)}
-            onBlur={() => setShowEmptyScreen(false)}
+            onChange={e => setInput(e.target.value)}
+            className="w-full py-3 px-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
           />
           <Button
             type="submit"
-            size={'icon'}
-            variant={'ghost'}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2"
-            disabled={input.length === 0}
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-transparent hover:bg-transparent"
           >
-            <ArrowRight size={20} />
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+                stroke="#9CA3AF"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </Button>
         </div>
-        <EmptyScreen
-          submitMessage={message => {
-            setInput(message)
-          }}
-          className={cn(showEmptyScreen ? 'visible' : 'invisible')}
-        />
       </form>
 
-    
-      
-        <div className="w-full p-4 overflow-hidden">
-          <div className="space-y-2">
-            {Array.from({ length: 2 }).map((_, rowIndex) => (
-              <div key={rowIndex} className="scrolling-container overflow-hidden whitespace-nowrap">
-                <div className="scrolling-row inline-block">
-                  {links.slice(rowIndex * 2, (rowIndex + 1) * 2).map((item, tagIndex) => (
-                    <a
-                      key={tagIndex}
-                      href={item.href}
-                      className="m-1 text-white text-xl font-medium px-2.5 py-0.5 rounded hover:bg-black inline-block"
-                    >
-                      {item.text}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-    
+      {/* 
+      <div className="mt-4 text-sm text-gray-500">
+        <span className="mr-2">☁️ 31°</span>
+        <span>Shenzhen</span>
+      </div>
+        */}
     </div>
   )
 }
