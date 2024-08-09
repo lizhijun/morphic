@@ -136,32 +136,54 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
             href: 'https://image.jiehuo.ai/'
           },
           {
+            icon: '🌀',
+            label: '视频',
+            href: 'https://video.jiehuo.ai/'
+          },
+          {
+            icon: '🗺️',
+            label: '创作',
+            href: 'https://shagua.jiehuo.ai/'
+          },
+          {
             icon: '🔧',
             label: '导航',
             href: 'https://tool.jiehuo.ai/'
           },
           {
-            /*
-          {
-            icon: '🗺️',
-            label: '地图',
-            href: 'https://map.jiehuo.ai/',
-          },
-          {
             icon: '🔄',
             label: '翻译',
-            href: 'https://translate.jiehuo.ai/',
+            href: 'https://translate.jiehuo.ai/'
           },
           {
             icon: '🌀',
-            label: '天气',
-            href: 'https://weather.jiehuo.ai/',
+            label: '电影',
+            href: 'https://movie.jiehuo.ai/'
+          },
+          {
+            icon: '🌀',
+            label: '图书',
+            href: 'https://book.jiehuo.ai/'
+          },
+          {
+            icon: '🗺️',
+            label: '播客',
+            href: 'https://dayuzhou.jiehuo.ai/'
           },
           {
             icon: '✉️',
-            label: '邮件',
-            href: 'https://mail.jiehuo.ai/',
-          }*/
+            label: '游戏',
+            href: 'https://game.jiehuo.ai/'
+          },
+          {
+            icon: '✉️',
+            label: 'API',
+            href: 'https://api.jiehuo.ai/'
+          },
+          {
+            icon: '✉️',
+            label: '简讯',
+            href: 'https://7x24.jiehuo.ai/'
           }
         ].map((item, index) => (
           <a key={index} href={item.href} target="_blank">
@@ -179,7 +201,7 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
             ref={inputRef}
             type="text"
             name="input"
-            placeholder="解惑一下"
+            placeholder="为你答疑解惑~"
             value={input}
             onChange={e => setInput(e.target.value)}
             className="w-full py-3 px-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
