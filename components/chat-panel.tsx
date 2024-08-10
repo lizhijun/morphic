@@ -135,6 +135,14 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
             label: '图片',
             href: 'https://image.jiehuo.ai/'
           },
+
+          {
+            icon: '🔧',
+            label: '导航',
+            href: 'https://tool.jiehuo.ai/'
+          },
+          {
+            /*
           {
             icon: '🌀',
             label: '视频',
@@ -144,11 +152,6 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
             icon: '🗺️',
             label: '创作',
             href: 'https://shagua.jiehuo.ai/'
-          },
-          {
-            icon: '🔧',
-            label: '导航',
-            href: 'https://tool.jiehuo.ai/'
           },
           {
             icon: '🔄',
@@ -184,6 +187,7 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
             icon: '✉️',
             label: '简讯',
             href: 'https://7x24.jiehuo.ai/'
+          }*/
           }
         ].map((item, index) => (
           <a key={index} href={item.href} target="_blank">
