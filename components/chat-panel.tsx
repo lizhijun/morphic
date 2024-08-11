@@ -133,13 +133,13 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
           {
             icon: '🖼️',
             label: '图片',
-            href: 'https://image.jiehuo.ai/'
+            href: 'https://cre8find.com'
           },
 
           {
             icon: '🔧',
             label: '导航',
-            href: 'https://tool.jiehuo.ai/'
+            href: 'https://tool.jiehuo.ai'
           },
           {
             /*
