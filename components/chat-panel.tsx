@@ -205,7 +205,7 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
             ref={inputRef}
             type="text"
             name="input"
-            placeholder="为你答疑解惑~"
+            placeholder="答疑解惑就用解惑AI"
             value={input}
             onChange={e => setInput(e.target.value)}
             className="w-full py-3 px-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
