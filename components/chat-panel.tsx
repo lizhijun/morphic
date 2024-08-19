@@ -131,9 +131,14 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
       <div className="flex justify-center space-x-8 mb-8">
         {[
           {
+            icon: '🪀',
+            label: '发现',
+            href: './discover'
+          },
+          {
             icon: '🖼️',
-            label: '图片',
-            href: 'https://cre8find.com'
+            label: '语义化图片搜索',
+            href: 'https://image.jiehuo.ai'
           },
 
           {
