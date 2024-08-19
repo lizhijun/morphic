@@ -7,6 +7,7 @@ import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 import 'katex/dist/katex.min.css'
 import { CodeBlock } from './ui/codeblock'
+import React from 'react';
 
 const rehypeKatexWrapper = () => rehypeKatex
 
@@ -40,16 +41,22 @@ export function BotMessage({ content }: { content: string }) {
       remarkPlugins={[remarkGfm]}
       className="prose-sm prose-neutral prose-a:text-accent-foreground/50"
       components={{
-        code({ node, inline, className, children, ...props }) {
-          if (children && children.length) {
-            if (children[0] === '▍') {
+        code({ node, inline, className, children, ...props }: {
+          node?: any;
+          inline?: boolean;
+          className?: string;
+          children?: React.ReactNode;
+        }) {
+          const childrenArray = React.Children.toArray(children);
+          if (childrenArray.length > 0) {
+            if (childrenArray[0] === '▍') {
               return (
                 <span className="mt-1 cursor-default animate-pulse">▍</span>
               )
             }
 
-            if (typeof children[0] === 'string') {
-              children[0] = children[0].replace('`▍`', '▍')
+            if (typeof childrenArray[0] === 'string') {
+              childrenArray[0] = childrenArray[0].replace('`▍`', '▍')
             }
           }
 
