@@ -26,7 +26,7 @@ export function BotMessage({ content }: { content: string }) {
           [rehypeExternalLinks, { target: '_blank' }],
           rehypeKatexWrapper
         ]}
-        remarkPlugins={[remarkGfm, remarkMath]}
+        remarkPlugins={[remarkGfm, remarkMath as any]}
         className="prose-sm prose-neutral prose-a:text-accent-foreground/50"
       >
         {processedData}
@@ -41,14 +41,16 @@ export function BotMessage({ content }: { content: string }) {
       className="prose-sm prose-neutral prose-a:text-accent-foreground/50"
       components={{
         code({ node, inline, className, children, ...props }) {
-          if (children.length) {
-            if (children[0] == '▍') {
+          if (children && children.length) {
+            if (children[0] === '▍') {
               return (
                 <span className="mt-1 cursor-default animate-pulse">▍</span>
               )
             }
 
-            children[0] = (children[0] as string).replace('`▍`', '▍')
+            if (typeof children[0] === 'string') {
+              children[0] = children[0].replace('`▍`', '▍')
+            }
           }
 
           const match = /language-(\w+)/.exec(className || '')
