@@ -136,14 +136,19 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
             href: './discover'
           },
           {
+            icon: '📚',
+            label: '百科全书',
+            href: './baike'
+          },
+          {
             icon: '🖼️',
             label: '语义化图片搜索',
             href: 'https://image.jiehuo.ai'
           },
 
           {
-            icon: '🔧',
-            label: '导航',
+            icon: '🤖',
+            label: '工具导航',
             href: 'https://tool.jiehuo.ai'
           },
           {

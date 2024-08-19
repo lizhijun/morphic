@@ -8,6 +8,8 @@ import rehypeKatex from 'rehype-katex'
 import 'katex/dist/katex.min.css'
 import { CodeBlock } from './ui/codeblock'
 
+const rehypeKatexWrapper = () => rehypeKatex
+
 export function BotMessage({ content }: { content: string }) {
   // Check if the content contains LaTeX patterns
   const containsLaTeX = /\\\[([\s\S]*?)\\\]|\\\(([\s\S]*?)\\\)/.test(
@@ -22,7 +24,7 @@ export function BotMessage({ content }: { content: string }) {
       <MemoizedReactMarkdown
         rehypePlugins={[
           [rehypeExternalLinks, { target: '_blank' }],
-          [rehypeKatex]
+          rehypeKatexWrapper
         ]}
         remarkPlugins={[remarkGfm, remarkMath]}
         className="prose-sm prose-neutral prose-a:text-accent-foreground/50"
