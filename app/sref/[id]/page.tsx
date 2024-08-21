@@ -88,6 +88,16 @@ export default async function SrefDetailPage({ params }: { params: { id: string 
           </div>
         </CardContent>
       </Card>
+
+      <div>
+        <h3>How to generate this style of picture?</h3>
+        <h3>怎么生成这种风格的图片?</h3>
+        <div>
+          1. prompt:  
+          2.
+          3.
+        </div>
+      </div>
     </div>
   );
 }
