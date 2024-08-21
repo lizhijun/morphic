@@ -131,7 +131,7 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
       <div className="flex justify-center space-x-8 mb-8">
         {[
           {
-            icon: '🪀',
+            icon: '🔥',
             label: '发现',
             href: './discover'
           },
@@ -142,13 +142,13 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
           },
           {
             icon: '🖼️',
-            label: '语义化图片搜索',
+            label: 'AI图片搜索',
             href: 'https://image.jiehuo.ai'
           },
 
           {
             icon: '🤖',
-            label: '工具导航',
+            label: 'AI工具',
             href: 'https://tool.jiehuo.ai'
           },
           {
@@ -200,7 +200,7 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
           }*/
           }
         ].map((item, index) => (
-          <a key={index} href={item.href} target="_blank">
+          <a key={index} href={item.href}>
             <div key={index} className="flex flex-col items-center">
               <div className="text-3xl mb-2">{item.icon}</div>
               <div className="text-sm">{item.label}</div>
@@ -215,7 +215,7 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
             ref={inputRef}
             type="text"
             name="input"
-            placeholder="答疑解惑就用解惑AI"
+            placeholder="你的生活好帮手"
             value={input}
             onChange={e => setInput(e.target.value)}
             className="w-full py-3 px-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"

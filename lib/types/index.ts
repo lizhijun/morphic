@@ -70,3 +70,12 @@ export type AIMessage = {
     | 'followup'
     | 'end'
 }
+
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  // 可以根据需要添加更多字段
+  createdAt: Date;
+  updatedAt: Date;
+}

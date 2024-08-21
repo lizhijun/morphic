@@ -9,13 +9,14 @@ import { Sidebar } from '@/components/sidebar'
 import { Toaster } from '@/components/ui/sonner'
 import { AppStateProvider } from '@/lib/utils/app-state'
 import { Analytics } from '@vercel/analytics/react'
+import { UserProvider } from '@/lib/user-context'
 
 const fontSans = FontSans({
   subsets: ['latin'],
   variable: '--font-sans'
 })
 
-const title = '解惑AI'
+const title = '解惑AI - 你的生活好帮手'
 const description = '基于AI的搜索引擎.'
 
 export const metadata: Metadata = {
@@ -47,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="zh" suppressHydrationWarning>
       <body className={cn('font-sans antialiased', fontSans.variable)}>
         <ThemeProvider
           attribute="class"
@@ -55,13 +56,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AppStateProvider>
-            <Header />
-            {children}
-            {/* <Sidebar /> 
-            <Footer />*/}
-            <Toaster />
-          </AppStateProvider>
+          <UserProvider>
+            <AppStateProvider>
+              <Header />
+              {children}
+              <Toaster />
+            </AppStateProvider>
+          </UserProvider>
         </ThemeProvider>
       </body>
     </html>
