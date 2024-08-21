@@ -152,6 +152,10 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
             href: 'https://tool.jiehuo.ai'
           },
           {
+            icon: '🌀',
+            label: '视频',
+            href: 'https://jiehuo.ai/sref'
+          },
             /*
           {
             icon: '🌀',

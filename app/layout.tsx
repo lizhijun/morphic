@@ -20,7 +20,7 @@ const title = '解惑AI - 你的生活好帮手'
 const description = '基于AI的搜索引擎.'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://jiehuoaii'),
+  metadataBase: new URL('https://jiehuo.ai'),
   title,
   description,
   openGraph: {
