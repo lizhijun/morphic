@@ -4,41 +4,45 @@ import remarkGfm from 'remark-gfm';
 import Image from 'next/image';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-
 import { supabase } from '@/lib/supabase';
 
-// 这个函数用于获取所有的 slugs，用于静态生成
-export async function generateStaticParams() {
-  const { data: markdownFiles } = await supabase
-    .from('markdown_files')
-    .select('slug');
+// 强制动态渲染
+export const dynamic = 'force-dynamic';
 
-  return markdownFiles?.map(({ slug }) => ({
-    slug,
-  })) || [];
-}
 
 // 这个函数从数据库获取文章内容
 async function getArticleContent(slug: string) {
-  const { data, error } = await supabase
-    .from('markdown_files')
-    .select('*')
-    .eq('slug', slug)
-    .single();
+  try {
+    const { data, error } = await supabase
+      .from('markdown_files')
+      .select('*')
+      .eq('slug', slug)
+      .single();
 
-  if (error) throw error;
+    if (error) {
+      console.error('Error fetching article:', error);
+      return null;
+    }
 
-  return {
-    title: data.title,
-    content: data.content,
-    author: data.author || 'Anonymous', // 假设你的表中有 author 字段，如果没有则使用 'Anonymous'
-    publishDate: new Date(data.created_at).toISOString().split('T')[0], // 格式化日期
-    imageUrl: data.cover_image_url || '/images/default-cover.jpg' // 使用封面图片 URL，如果没有则使用默认图片
-  };
+    return {
+      title: data.title,
+      content: data.content,
+      author: data.author || 'Anonymous',
+      publishDate: new Date(data.created_at).toISOString().split('T')[0],
+      imageUrl: data.cover_image_url || '/images/default-cover.jpg'
+    };
+  } catch (error) {
+    console.error('Error in getArticleContent:', error);
+    return null;
+  }
 }
 
 export default async function ArticlePage({ params }: { params: { slug: string } }) {
   const article = await getArticleContent(params.slug);
+
+  if (!article) {
+    return <div className="text-center p-6">文章不存在或加载失败</div>;
+  }
 
   return (
     <div className="article-page max-w-4xl mx-auto p-6">

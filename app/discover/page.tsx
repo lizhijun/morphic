@@ -3,6 +3,8 @@ import { BlogCard, FeaturedBlogCard, InterestTag, SaveButton } from '@/component
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 
+// 使用动态渲染而不是静态生成
+export const dynamic = 'force-dynamic';
 
 async function getMarkdownFiles() {
   const { data, error } = await supabase
