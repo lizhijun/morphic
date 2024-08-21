@@ -145,17 +145,17 @@ export function ChatPanel({ messages, query }: ChatPanelProps) {
             label: 'AI图片搜索',
             href: 'https://image.jiehuo.ai'
           },
-
+          {
+            icon: '🌈',
+            label: 'Srefs',
+            href: 'https://jiehuo.ai/sref'
+          },
           {
             icon: '🤖',
             label: 'AI工具',
             href: 'https://tool.jiehuo.ai'
           },
           {
-            icon: '🌀',
-            label: '视频',
-            href: 'https://jiehuo.ai/sref'
-          },
             /*
           {
             icon: '🌀',
