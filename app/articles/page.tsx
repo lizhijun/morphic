@@ -7,30 +7,18 @@ import { supabase } from '@/lib/supabase';
 export const dynamic = 'force-dynamic';
 
 async function getMarkdownFiles() {
-  try {
-    const { data, error } = await supabase
-      .from('jh_pages')
-      .select('*')
-      .order('created_at', { ascending: false })
-      .limit(3);
+  const { data, error } = await supabase
+    .from('markdown_files')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(3);
 
-    if (error) {
-      console.error("Supabase error:", error);
-      throw error;
-    }
-
-    console.log("Retrieved data:", data);
-    return data;
-  } catch (err) {
-    console.error("Error in getMarkdownFiles:", err);
-    throw err;
-  }
+  if (error) throw error;
+  return data;
 }
 
 const DiscoverPage = async () => {
   const markdownFiles = await getMarkdownFiles();
-
-  console.log("markdownFiles", markdownFiles)
 
   return (
     <div className="discover-page p-6 max-w-7xl mx-auto">
@@ -38,9 +26,9 @@ const DiscoverPage = async () => {
       
       <div className="blog-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
         {markdownFiles.map((file) => (
-          <Link href={`/page/${file.id}`} key={file.id} passHref>
+          <Link href={`/page/${file.slug}`} key={file.id} passHref>
             <BlogCard
-              imageUrl={'/images/placeholder-image.png'}
+              imageUrl={file.cover_image_url || '/images/default-cover.jpg'}
               title={file.title}
               description={file.content.substring(0, 100) + '...'}
               author="User"
@@ -48,6 +36,10 @@ const DiscoverPage = async () => {
           </Link>
         ))}
       </div>
+
+      <Link href="/save-markdown">
+        + 发布
+      </Link>
       
       {/*
       <div className="interest-section bg-gray-100 p-6 rounded-lg">
